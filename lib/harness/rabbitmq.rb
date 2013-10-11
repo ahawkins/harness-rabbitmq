@@ -3,7 +3,7 @@ require "harness/rabbitmq/version"
 require 'harness'
 
 require 'uri'
-require 'net/http'
+require 'net/https'
 require 'multi_json'
 
 module Harness
@@ -17,7 +17,19 @@ module Harness
     end
 
     def log
-      response = Net::HTTP.get_response URI(@url)
+      uri = URI.parse @url
+
+      http = Net::HTTP.new uri.host, uri.port
+      http.use_ssl = uri.scheme == 'https'
+
+      request = Net::HTTP::Get.new uri.request_uri
+
+      if uri.user || uri.password
+        request.basic_auth uri.user, uri.password
+      end
+
+      response = http.request request
+      body = MultiJson.load response.body
 
       if response.code.to_i != 200
         raise BadResponseError, "Server did not respond correctly! #{response.inspect}"
