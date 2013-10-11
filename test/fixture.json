@@ -1,0 +1,28 @@
+[
+  {
+    "message_stats":{
+      "confirm":1,
+      "confirm_details":{
+        "rate":0.0
+      },
+      "publish_in":90803,
+      "publish_in_details":{
+        "rate":0.0
+      },
+      "publish_out":83055,
+      "publish_out_details":{
+        "rate":0.0
+      }
+    },
+    "name":"dummy",
+    "vhost":"pibhbhyv",
+    "type":"fanout",
+    "durable":true,
+    "auto_delete":false,
+    "internal":false,
+    "arguments":{
+
+    },
+    "policy":"HA"
+  }
+]
